@@ -1,0 +1,4 @@
+org/olxscrapper/Main.class
+org/olxscrapper/data/OlxItem.class
+org/olxscrapper/util/PushbulletNotifier.class
+org/olxscrapper/data/Mensagem.class
