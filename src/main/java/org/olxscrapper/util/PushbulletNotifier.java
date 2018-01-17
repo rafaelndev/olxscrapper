@@ -15,11 +15,12 @@ public class PushbulletNotifier implements Runnable {
 	}
 
 	public void run() {
-		System.out.println("Teste Pushbullet");
 		String apiToken = "o.la5tSSKTyH36DeVvDSHpmVFl3BVhWUdQ";
 		Pushbullet pb = new Pushbullet(apiToken);
 		SendablePush newPush = new SendableNotePush(mensagem.getTitulo(), mensagem.getMsgBody());
 		pb.push(newPush);
+		
+		System.out.println("Mensagem Enviada");
 	}
 
 }
