@@ -1,7 +1,5 @@
 package org.olxscrapper.util;
 
-import java.io.IOException;
-
 import org.olxscrapper.data.Mensagem;
 
 import com.github.sheigutn.pushbullet.Pushbullet;
@@ -20,11 +18,7 @@ public class PushbulletNotifier implements Runnable {
 	public void run() {
 		String pushbulletKey = "";
 		
-		try {
-			pushbulletKey = GetProperties.getInstance().getPushbulletKey();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		pushbulletKey = GetProperties.getInstance().getPushbulletKey();
 
 		Pushbullet pb = new Pushbullet(pushbulletKey);
 		SendablePush newPush = new SendableNotePush(mensagem.getTitulo(), mensagem.getMsgBody());

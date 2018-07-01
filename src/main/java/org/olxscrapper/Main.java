@@ -12,6 +12,7 @@ import org.jsoup.select.Elements;
 import org.olxscrapper.dao.OlxItemDAO;
 import org.olxscrapper.data.Mensagem;
 import org.olxscrapper.data.OlxItem;
+import org.olxscrapper.util.GetProperties;
 import org.olxscrapper.util.PushbulletNotifier;
 
 public class Main {
@@ -19,19 +20,16 @@ public class Main {
 	public static void main(String[] args) {
 		Document doc = null;
 		OlxItemDAO olxItemDao = new OlxItemDAO();
+		GetProperties propriedades = GetProperties.getInstance();
 
-		PushbulletNotifier tn = new PushbulletNotifier(new Mensagem("titulo", "Corpo"));
-		ExecutorService executorService2 = Executors.newCachedThreadPool();
-		executorService2.execute(tn);
-		boolean teste = true;
+		while (true) {
 
-		while (!teste) {
 			try {
 				// Buscar o Documento principal de Busca
 				doc = Jsoup.connect("http://ba.olx.com.br/grande-salvador/imoveis/aluguel?pe=600")
 						.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1") // Precisa
 						// do Agent do Desktop, se não a página mobile é acessada
-						.timeout(30 * 1000) // 30 segundos
+						.timeout(propriedades.getJsoup_timeout() * 1000) // 30 segundos
 						.get();
 				// Buscar a lista principal de ads do OLX
 				Element main_list = doc.select("ul#main-ad-list").first();
@@ -64,7 +62,7 @@ public class Main {
 						executorService.execute(pn);
 					}
 					try {
-						Thread.sleep(5000);
+						Thread.sleep(propriedades.getSearch_delay() * 1000 * 60);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -73,9 +71,7 @@ public class Main {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
 
 	}
-
 }
