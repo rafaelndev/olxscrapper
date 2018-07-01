@@ -2,8 +2,6 @@ package org.olxscrapper;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,7 +20,12 @@ public class Main {
 		Document doc = null;
 		OlxItemDAO olxItemDao = new OlxItemDAO();
 
-		while (true) {
+		PushbulletNotifier tn = new PushbulletNotifier(new Mensagem("titulo", "Corpo"));
+		ExecutorService executorService2 = Executors.newCachedThreadPool();
+		executorService2.execute(tn);
+		boolean teste = true;
+
+		while (!teste) {
 			try {
 				// Buscar o Documento principal de Busca
 				doc = Jsoup.connect("http://ba.olx.com.br/grande-salvador/imoveis/aluguel?pe=600")

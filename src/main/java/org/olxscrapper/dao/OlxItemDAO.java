@@ -2,15 +2,12 @@ package org.olxscrapper.dao;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaQuery;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.olxscrapper.data.OlxItem;
-import org.olxscrapper.util.Hash;
 import org.olxscrapper.util.HibernateConnector;
 
 public class OlxItemDAO {

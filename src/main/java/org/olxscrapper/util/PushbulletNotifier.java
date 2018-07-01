@@ -1,8 +1,11 @@
 package org.olxscrapper.util;
 
+import java.io.IOException;
+
 import org.olxscrapper.data.Mensagem;
 
 import com.github.sheigutn.pushbullet.Pushbullet;
+import com.github.sheigutn.pushbullet.exception.PushbulletApiException;
 import com.github.sheigutn.pushbullet.items.push.sendable.SendablePush;
 import com.github.sheigutn.pushbullet.items.push.sendable.defaults.SendableNotePush;
 
@@ -15,12 +18,26 @@ public class PushbulletNotifier implements Runnable {
 	}
 
 	public void run() {
-		String apiToken = "o.la5tSSKTyH36DeVvDSHpmVFl3BVhWUdQ";
-		Pushbullet pb = new Pushbullet(apiToken);
-		SendablePush newPush = new SendableNotePush(mensagem.getTitulo(), mensagem.getMsgBody());
-		pb.push(newPush);
+		String pushbulletKey = "";
 		
-		System.out.println("Mensagem Enviada");
+		try {
+			pushbulletKey = GetProperties.getInstance().getPushbulletKey();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Pushbullet pb = new Pushbullet(pushbulletKey);
+		SendablePush newPush = new SendableNotePush(mensagem.getTitulo(), mensagem.getMsgBody());
+		try {
+			
+			pb.push(newPush);
+		} catch (PushbulletApiException e) {
+			System.out.println("Ocorreu um erro com a chave do Pushbullet, ela pode não ter sido fornecida ou está invalida.");
+			e.printStackTrace();
+		} finally {
+			System.out.println("Mensagem Enviada");
+		}
+		
 	}
 
 }
