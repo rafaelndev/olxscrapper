@@ -3,22 +3,15 @@ package org.olxscrapper;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.olxscrapper.dao.OlxItemDAO;
-import org.olxscrapper.data.Mensagem;
 import org.olxscrapper.data.OlxItem;
 import org.olxscrapper.util.GetProperties;
-import org.olxscrapper.util.PushbulletNotifier;
 
 import com.github.sheigutn.pushbullet.Pushbullet;
 import com.github.sheigutn.pushbullet.items.file.UploadFile;

@@ -13,8 +13,8 @@ public class GetProperties {
 	private String pushbullet_key = "";
 	private String olx_url;
 
-	private Integer jsoup_timeout = 30; // Padrão 30 segundos
-	private Integer search_delay = 300; // Padrão 5 minutos
+	private int jsoup_timeout = 30; // Padrão 30 segundos
+	private int search_delay = 300; // Padrão 5 minutos
 	
 	private GetProperties() {
 		try {
@@ -30,14 +30,14 @@ public class GetProperties {
 			pushbullet_key = prop.getProperty("pushbullet_key").trim();
 
 			try {
-				jsoup_timeout = Integer.valueOf(prop.getProperty("jsoup_timeout").trim());
+				jsoup_timeout = Integer.parseInt(prop.getProperty("jsoup_timeout").trim());
 			} catch (NumberFormatException e) {
 				System.out.println("Ocorreu um erro ao ler a propriedade jsoup_timeout, verifique se o valor está correto.");
 				e.printStackTrace();
 			}
 
 			try {
-				search_delay = Integer.valueOf(prop.getProperty("search_delay").trim());
+				search_delay = Integer.parseInt(prop.getProperty("search_delay").trim());
 			} catch (NumberFormatException e) {
 				System.out.println("Ocorreu um erro ao ler a propriedade search_delay, verifique se o valor está correto.");
 				e.printStackTrace();
@@ -68,11 +68,11 @@ public class GetProperties {
 		return pushbullet_key;
 	}
 
-	public Integer getJsoup_timeout() {
+	public int getJsoup_timeout() {
 		return jsoup_timeout;
 	}
 
-	public Integer getSearch_delay() {
+	public int getSearch_delay() {
 		return search_delay;
 	}
 
