@@ -11,6 +11,7 @@ public class GetProperties {
 	private static GetProperties INSTANCIA = null;
 	
 	private String pushbullet_key = "";
+	private String olx_url;
 
 	private Integer jsoup_timeout = 30; // Padrão 30 segundos
 	private Integer search_delay = 300; // Padrão 5 minutos
@@ -26,18 +27,23 @@ public class GetProperties {
 				throw new FileNotFoundException("Arquivo de configuração " + CONFIG_FILE + "' não foi encontrado");
 			}
 
-			pushbullet_key = prop.getProperty("pushbullet_key");
+			pushbullet_key = prop.getProperty("pushbullet_key").trim();
+
 			try {
-				jsoup_timeout = Integer.valueOf(prop.getProperty("jsoup_timeout"));
+				jsoup_timeout = Integer.valueOf(prop.getProperty("jsoup_timeout").trim());
 			} catch (NumberFormatException e) {
 				System.out.println("Ocorreu um erro ao ler a propriedade jsoup_timeout, verifique se o valor está correto.");
+				e.printStackTrace();
 			}
 
 			try {
-				search_delay = Integer.valueOf(prop.getProperty("search_delay"));
+				search_delay = Integer.valueOf(prop.getProperty("search_delay").trim());
 			} catch (NumberFormatException e) {
 				System.out.println("Ocorreu um erro ao ler a propriedade search_delay, verifique se o valor está correto.");
+				e.printStackTrace();
 			}
+
+			olx_url = prop.getProperty("olx_url").trim();
 
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);
@@ -50,7 +56,7 @@ public class GetProperties {
 		}
 
 	}
-	
+
 	public static GetProperties getInstance() {
 		if (INSTANCIA == null) {
 			INSTANCIA = new GetProperties();
@@ -68,5 +74,19 @@ public class GetProperties {
 
 	public Integer getSearch_delay() {
 		return search_delay;
+	}
+
+	/**
+	 * @return the olx_url
+	 */
+	public String getOlx_url() {
+		return olx_url;
+	}
+
+	/**
+	 * @param olx_url the olx_url to set
+	 */
+	public void setOlx_url(String olx_url) {
+		this.olx_url = olx_url;
 	}
 }

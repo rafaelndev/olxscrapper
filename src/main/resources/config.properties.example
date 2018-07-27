@@ -1,6 +1,8 @@
-# Chave API do pushbullet (para envio de notificações)
+# Chave API do pushbullet (para envio de notificaÃ§Ãµes)
 pushbullet_key=PUSHBULLET_API_TOKEN
 # Tempo de espera do jsoup (em segundos)
 jsoup_timeout=30 
 # Tempo de espera para uma nova busca na olx (em segundos)
 search_delay=300
+
+olx_url=URL_DA_BUSCA_OLX

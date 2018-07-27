@@ -3,7 +3,6 @@ package org.olxscrapper.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -19,10 +18,10 @@ public class OlxItemDAO {
 	}
 
 	public List<OlxItem> lisItems() {
-		Query query = this.session.createQuery("from OlxItem oi");
+		Criteria criteria = this.session.createCriteria(OlxItem.class);
 
 		try {
-			List<OlxItem> queryList = query.list();
+			List<OlxItem> queryList = criteria.list();
 			if (queryList != null && queryList.isEmpty()) {
 				return null;
 			} else {
